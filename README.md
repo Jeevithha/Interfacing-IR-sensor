@@ -50,14 +50,44 @@ For most of the Arduino projects, this sensor is used to detect proximity or to 
 ![image](https://github.com/anishkumar-Embedded/Interfacing-IR-sensor/assets/71547910/900efe19-3953-4492-9403-042bdf6c3413)
 
 This sensor has three pins two of which are power pins leveled VCC and GND and the other one is the sense/data pin which is shown in the diagram above. It has an onboard power LED and a signal LED the power LED turns on when power is applied to the board the signal LED turns on when the circuit is triggered. This board also has a comparator Op-amp that is responsible for converting the incoming analog signal from the photodiode to a digital signal. We also have a sensitivity adjustment potentiometer; with that, we can adjust the sensitivity of the device. Last and finally, we have the photodiode and the IR emitting LED pair which all together make the total IR Proximity Sensor Module.
-
-
-
 ## PROGRAM:
+```
+#define IR_sensor 8
+#define LED 13
+int IR_value;
+void setup ()
+{
+  pinMode (IR_sensor, INPUT);
+  pinMode (LED, OUTPUT);
+  Serial. begin (9600) ;
+}
+void loop ()
+{
+  IR_value=digitalRead (IR_sensor);
+  if (IR_value==0)
+  {
+    digitalWrite (LED, HIGH);
+    Serial.print ("\nSensor Value: ");
+    Serial.print (IR_value);
+    Serial.println("Person Detected: ");
+    delay (1000);
+  }
+else
+{ 
+  digitalWrite(LED, LOW);
 
+  Serial.print("\nSensor Value: ");
+
+  Serial.print(IR_value);
+
+  Serial.println("Person Not Detected: "); delay(1000);
+ }
+}
+```
 ## CIRCUIT DIAGRAM:
-
+![246156683-9a51e7f2-4ee2-44f4-9323-4a532424a1a3](https://github.com/Jeevithha/Interfacing-IR-sensor/assets/123623197/e348eec2-f7f7-46bc-9f6a-4c59a0ca52d8)
 ## OUTPUT:
-
+![246156315-2cb3f3ff-34ec-4f32-a177-4c7a84324054](https://github.com/Jeevithha/Interfacing-IR-sensor/assets/123623197/a4ffa1c4-a8b3-4c1c-b895-b00de6a2c149)
+![246156083-8a4d925c-605a-4a7f-8228-26241c39d91c](https://github.com/Jeevithha/Interfacing-IR-sensor/assets/123623197/c6ef6b97-a716-4d0b-b019-a83d29decb01)
 ## RESULT:
 Thus the IR sensor module is interfaced with Arduino UNO controller and output is verified.
